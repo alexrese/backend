@@ -9,7 +9,11 @@ app.get('/projects', (request, response) =>{
     // const query = request.query; // todos os valores
     // const {title} = request.query; // parametros nomeados e desestruturados 
     // console.log(title);
-    return response.json(projects);
+    const {title} = request.query;
+    const results = title 
+        ? projects.filter(project => project.title.includes(title)) 
+        : projects;
+    return response.json(results);
 });
 
 app.put('/projects/:id', (request, response) =>{
